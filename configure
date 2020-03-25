@@ -3694,7 +3694,11 @@ fi
 if test "x$ac_cv_header_X11_Intrinsic_h" = xyes; then :
 
 else
-  as_fn_error $? "could not find libxt development headers" "$LINENO" 5
+  if [[ $ON_MAC -eq "yes" ]] && [[ $(sw_vers -productVersion) == 10.15.* ]] ; then
+    echo "have 10.15.* and on mac so allow libxt X11 Intrinsic_h to pass"
+  else
+    as_fn_error $? "could not find libxt development headers" "$LINENO" 5
+  fi
 fi
 
 
